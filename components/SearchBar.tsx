@@ -1,29 +1,34 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface SearchBarProps {
-  onSearch: (query: string) => void
+  searchTerm?: string
+  onSearchChange: (term: string) => void
   placeholder?: string
 }
 
-export default function SearchBar({ onSearch, placeholder = "Search resources..." }: SearchBarProps) {
-  const [query, setQuery] = useState('')
+export default function SearchBar({ searchTerm = '', onSearchChange, placeholder = "Search resources..." }: SearchBarProps) {
+  const [query, setQuery] = useState(searchTerm)
+
+  useEffect(() => {
+    setQuery(searchTerm)
+  }, [searchTerm])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    onSearch(query)
+    onSearchChange(query)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newQuery = e.target.value
     setQuery(newQuery)
-    onSearch(newQuery) // Real-time search
+    onSearchChange(newQuery) // Real-time search
   }
 
   const handleClear = () => {
     setQuery('')
-    onSearch('')
+    onSearchChange('')
   }
 
   return (

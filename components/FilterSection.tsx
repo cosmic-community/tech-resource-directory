@@ -73,6 +73,16 @@ export default function FilterSection({ categories, tags }: FilterSectionProps) 
     }))
   }
 
+  const handleClearTags = () => {
+    setSelectedTags([])
+    window.dispatchEvent(new CustomEvent('filterChange', {
+      detail: { 
+        type: 'tags', 
+        value: [] 
+      }
+    }))
+  }
+
   const clearAllFilters = () => {
     setSearchTerm('')
     setSelectedCategory(null)
@@ -182,6 +192,7 @@ export default function FilterSection({ categories, tags }: FilterSectionProps) 
               tags={tags}
               selectedTags={selectedTags}
               onTagToggle={handleTagToggle}
+              onClearTags={handleClearTags}
             />
           </div>
         </div>

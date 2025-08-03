@@ -2,13 +2,14 @@ import { Resource } from '@/types'
 
 interface ResourceCardProps {
   resource: Resource
+  className?: string
 }
 
-export default function ResourceCard({ resource }: ResourceCardProps) {
+export default function ResourceCard({ resource, className = '' }: ResourceCardProps) {
   const { metadata } = resource
 
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 overflow-hidden">
+    <div className={`bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 overflow-hidden ${className}`}>
       <div className="p-6">
         {/* Header with title and featured badge */}
         <div className="flex items-start justify-between mb-3">
